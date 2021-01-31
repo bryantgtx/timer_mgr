@@ -4,7 +4,7 @@
 
 This app allows you to create Time Card entries in third party systems.  It currently supports [Harvest](https://getharvest.com).  When you create a timer, you can give it any name you want.  The description field will be sent to Harvest as notes for any timecard entries created.
 
-Timers can be in one of two modes - either 'timer' mode, or 'entry' mode.  Timer mode will tick away the seconds while running, while entry mode just expects hours and minutes to be entered 'hh:mm', or just hours as a fraction.  It will convert the fraction to hh:mm display autoamtically.
+Timers can be in one of two modes - either 'timer' mode, or 'entry' mode.  Timer mode will tick away the seconds while running, while entry mode just expects hours and minutes to be entered 'hh:mm', or just hours as a fraction.  It will convert the fraction to hh:mm display automatically.
 
 For Harvest, timecard entries are always sent as a duration.  This means you must ensure that your Harvest is configured to allow this (done on the Harvest Setting page for your account).
 
