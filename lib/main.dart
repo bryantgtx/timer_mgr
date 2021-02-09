@@ -12,8 +12,8 @@ import 'package:timer_mgr/work_timer_list/work_timer_repository.dart';
 
 import 'harvest/info/harvest_info_repository.dart';
 
-void main() async {
-  await Hive.initFlutter();
+void main(List<String> args) async {
+ await Hive.initFlutter();
   final timerBox = await Hive.openBox(Strings.hiveTimerBoxName);
   final oauthBox = await Hive.openBox(Strings.oAuthCredsBoxName);
   final harvestInfoBox = await Hive.openBox(Strings.harvestHiveAssignmentBoxName);
@@ -33,7 +33,7 @@ void main() async {
           create: (_)=> HarvestInfoBloc(HarvestInfoRepository(harvestInfoBox)),
         ), 
      ], 
-      child:  TimerApp(),
+      child:  TimerApp(args),
     )
   );
 }

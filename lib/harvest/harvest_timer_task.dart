@@ -31,8 +31,8 @@ class HarvestTimerTask implements WorkTimerTask {
   }
 
   @override
-  void createTimecardEntry(double hours, DateTime spentDate, String description) {
-    HarvestApi().submitTimeEntry(
+  Future<void> createTimecardEntry(double hours, DateTime spentDate, String description) async {
+    await HarvestApi().submitTimeEntry(
       projectId: projectId,
       taskId: taskId,
       spentDate: spentDate,

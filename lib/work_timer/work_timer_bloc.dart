@@ -91,12 +91,12 @@ class WorkTimerBloc extends Bloc<WorkTimerEvent, WorkTimerReadyState> {
   Future sendTimeEntries(WorkTimer timer) async {
     print('Should send off ${timer.elapsed} seconds');
     int taskCount = timer.tasks.length;
-    timer.tasks.forEach((task) { 
+    await Future.forEach(timer.tasks, (task) async { 
       switch (task.taskType) {
         case HarvestTimerTask.harvestTaskType:
           double splitDuration = (timer.elapsed / taskCount) / 3600.0;
           if (splitDuration >= Settings.minimumTimeCardDuration) {
-            task.createTimecardEntry(splitDuration, DateTime.now(), timer.description);
+            await task.createTimecardEntry(splitDuration, DateTime.now(), timer.description);
           }
           break;
         default:

@@ -1,4 +1,9 @@
 class OAuthCredentials {
-  static get harvestId => const String.fromEnvironment("harvestId");
-  static get harvestSecret => const String.fromEnvironment("harvestSecret");
+  static var args = Map<String, String>();
+  static get harvestId => args['harvestId'] != null 
+    ? args['harvestId']
+    : const String.fromEnvironment('harvestId');
+  static get harvestSecret => args['harvestSecret'] != null 
+    ? args['harvestSecret']
+    : const String.fromEnvironment('harvestSecret');
 }

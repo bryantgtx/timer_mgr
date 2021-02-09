@@ -42,6 +42,8 @@ class Strings {
   static const harvestSelectProjectPrompt = 'Please select a project';
   static const harvestSelectTaskPrompt = 'Please select a task';
 
+  static const okayDialogButton = 'OK';
+
   // non-translatable
   static String hiveTimerBoxName = 'timers';
   static String oAuthCredsBoxName = 'oauth';
@@ -49,4 +51,5 @@ class Strings {
   static String harvestHiveAccountIdKey = 'harvest_accountId';
   static String harvestHiveAssignmentBoxName = 'harvest';
   static String harvestHiveAssignmentKey = 'harvest_assignment';
+  static String logErrorName = 'log_errors';
 }

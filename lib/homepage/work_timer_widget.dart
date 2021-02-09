@@ -27,15 +27,18 @@ class _WorkTimerWidgetState extends State<WorkTimerWidget> {
   final focusDuration = FocusNode();
   bool isEntryMode = false;
 
+  String convertDecimalTime(String value) {
+    return value.contains(':')
+      ? value
+      : TimeFunctions.timeFormatFromHours(double.parse(value));
+  }
+
   @override
   void initState() {
     super.initState();
     focusDuration.addListener(() {
       if (!focusDuration.hasFocus) {
-        var value = durationCtrlr.text;
-        if (value.contains('.')) {
-          durationCtrlr.text = TimeFunctions.timeFormatFromHours(double.parse(value));
-        }
+        durationCtrlr.text = convertDecimalTime(durationCtrlr.text);
       }
     });
   }
@@ -83,12 +86,16 @@ class _WorkTimerWidgetState extends State<WorkTimerWidget> {
     }
 
     void onDurationSubmit() {
+      // Just clicking the submit button does not trigger the loss of focus, so need
+      // to duplicate that conversion
+      durationCtrlr.text = convertDecimalTime(durationCtrlr.text);
       int duration = TimeFunctions.parseSeconds(durationCtrlr.text);
-      var timerBloc = BlocProvider.of<WorkTimerBloc>(context);
-      timerBloc.add(WorkTimerTicked(duration: duration));
+      if (duration > 0) {
+        BlocProvider.of<WorkTimerBloc>(context)
+          ..add(WorkTimerTicked(duration: duration))
+          ..add(WorkTimerStop());
+      }
       durationCtrlr.text = '';
-      timerBloc.add(WorkTimerStop());
-      timerBloc.close();
     }
 
     List<Widget> timeDisplayControls(WorkTimerReadyState state) {

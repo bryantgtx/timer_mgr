@@ -45,7 +45,7 @@ class _HarvestInfoWidgetState extends State<HarvestInfoWidget> {
       widgets.add(Text(Strings.harvestInfoLoading));
     }
     else if (state is HarvestInfoLoaded) {
-      widgets.add(RaisedButton(
+      widgets.add(ElevatedButton(
         onPressed: () async {
           BlocProvider.of<HarvestInfoBloc>(context)
             .add(HarvestInfoEventLoad(fromApi: true));
@@ -73,7 +73,7 @@ class _HarvestInfoWidgetState extends State<HarvestInfoWidget> {
         ),
       );
     }
-    widgets.add(RaisedButton(
+    widgets.add(ElevatedButton(
       onPressed: () async {
         BlocProvider.of<HarvestAuthBloc>(context)
           .add(HarvestAuthLogout());
@@ -88,11 +88,11 @@ class _HarvestInfoWidgetState extends State<HarvestInfoWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget> [
-        RaisedButton(
+        ElevatedButton(
           child: Text(Strings.harvestCancelSelectTask),
           onPressed: () => Navigator.pop(context),
         ),
-      //   RaisedButton(
+      //   ElevatedButton(
       //     child: Text(Strings.harvestSelectTask),
       //     onPressed: timerTasks.length > 0
       //       ? () => Navigator.pop(context, timerTasks)
