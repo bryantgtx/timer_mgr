@@ -30,7 +30,7 @@ class TimeFunctions {
     int hours = 0;
     int minutes = 0;
     List<String> parts = duration.split(':');
-    if (parts.length > 2 && parts[parts.length - 2].isNotEmpty) {
+    if (parts.length >= 2 && parts[parts.length - 2].isNotEmpty) {
       hours = int.parse(parts[parts.length - 2]);
     }
     if (parts.length > 1) {

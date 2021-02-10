@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:timer_mgr/harvest/auth/harvest_auth_bloc.dart';
 import 'package:timer_mgr/resources/strings.dart';
+import 'package:timer_mgr/widgets/okay_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final _authorizationEndpoint = Uri.parse('https://id.getharvest.com/oauth2/authorize');
@@ -29,6 +30,10 @@ class _HarvestLoginButtonState extends State<HarvestLoginButton> {
 
   Future<void> _getOAuth2Client(BuildContext context, Uri redirectUrl) async {
     if (widget.harvestClientId.isEmpty || widget.harvestClientSecret.isEmpty) {
+      await showDialog(
+        context: context,
+        builder: (context) => OkayDialog('Missing Harvest API info', 'Need to have api info in environment'),
+      );
       throw const HarvestLoginException(
           'harvestClientId and harvestClientSecret must be not empty. '
           'See `lib/oauth_creds.dart` for more detail.');
@@ -71,6 +76,10 @@ class _HarvestLoginButtonState extends State<HarvestLoginButton> {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
+      await showDialog(
+        context: context,
+        builder: (context) => OkayDialog('URL Launch Error', 'System disallowed launching OAuth'),
+      );
       throw HarvestLoginException('Could not launch $url');
     }
   }
@@ -104,7 +113,7 @@ class _HarvestLoginButtonState extends State<HarvestLoginButton> {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
       onPressed: () async {
         await _redirectServer?.close();
         // Harvest requires a specified port

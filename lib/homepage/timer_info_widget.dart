@@ -196,11 +196,11 @@ class _TimerInfoWidgetState extends State<TimerInfoWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget> [
-        RaisedButton(
+        ElevatedButton(
           child: Text(Strings.workTimerInfo_CancelButton),
           onPressed: () => Navigator.pop(context, cancelMessageText),
         ),
-        RaisedButton(
+        ElevatedButton(
           child: Text(submitButtonText),
           onPressed: enableCreate
             ? _onSubmit
